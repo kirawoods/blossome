@@ -1,0 +1,21 @@
+.ListItem {
+  display: flex;
+  background-color: aquamarine;
+  border-radius: 3px;
+  width: 300px;
+  padding: 10px;
+}
+
+.TaskName {
+  padding-left: 10px;
+  margin: auto 0px;
+  font-size: 20px;
+}
+
+.Points {
+  font-weight: bold;
+  border-radius: 3px;
+  background-color: white;
+  border: 2px solid black;
+  padding: 8px;
+}
