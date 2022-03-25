@@ -2,8 +2,9 @@
   display: flex;
   background-color: aquamarine;
   border-radius: 3px;
-  width: 300px;
+  width: 600px;
   padding: 10px;
+  margin: 10px 0;
 }
 
 .TaskName {
@@ -14,6 +15,8 @@
 
 .Points {
   font-weight: bold;
+  width: 20px;
+  height: 20px;
   border-radius: 3px;
   background-color: white;
   border: 2px solid black;

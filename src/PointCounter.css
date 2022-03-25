@@ -1,0 +1,16 @@
+.PointCounter {
+  display: flex;
+  padding-right: 50px;
+  align-self: center;
+}
+
+.coin-image {
+  height: 50px;
+  width: 50px;
+}
+
+.point-total {
+  font-size: 25px;
+  padding-left: 10px;
+  align-self: center;
+}

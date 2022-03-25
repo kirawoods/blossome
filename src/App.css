@@ -1,5 +1,17 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.Header {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.HeaderText {
+  margin-left: 10px;
 }
 
 .Title {
@@ -8,4 +20,8 @@
 
 .Subtitle {
   font-size: 20px;
+}
+
+.ItemList {
+  margin: 0px auto;
 }
