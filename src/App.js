@@ -33,14 +33,15 @@ function App() {
         {list.map((item) => {
           return (
             <>
-              <span
-                name={item.name}
-                points={item.points}
-                onClick={handleRemoveItem}
-              >
-                x
-              </span>
-              <ListItem name={item.name} points={item.points} />
+              <div className="item-container">
+                <span
+                  className="checkbox"
+                  name={item.name}
+                  points={item.points}
+                  onClick={handleRemoveItem}
+                />
+                <ListItem name={item.name} points={item.points} />
+              </div>
             </>
           );
         })}
