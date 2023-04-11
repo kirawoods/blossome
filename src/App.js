@@ -2,22 +2,27 @@ import "./App.css";
 import { ListItem } from "./ListItem";
 import { PointCounter } from "./PointCounter";
 import { useState } from "react";
+import { ToDoForm } from "./ToDoForm";
+import data from "./data.json";
 
 function App() {
-  const defaultList = [
-    { name: "ItemOne", points: 5 },
-    { name: "ItemTwo", points: 10 },
-    { name: "ItemThree", points: 15 },
-  ];
-
-  const [list, updateList] = useState(defaultList);
+  const [toDoList, setToDoList] = useState(data);
   const [pointTotal, updatePointTotal] = useState(0);
 
   const handleRemoveItem = (e) => {
+    const name = e.target.getAttribute("name");
+    setToDoList(toDoList.filter((item) => item.name !== name));
     const points = e.target.getAttribute("points");
     updatePointTotal(parseInt(pointTotal) + parseInt(points));
-    const name = e.target.getAttribute("name");
-    updateList(list.filter((item) => item.name !== name));
+  };
+
+  const addTask = (taskInput, pointInput) => {
+    let copy = [...toDoList];
+    copy = [
+      ...copy,
+      { id: toDoList.length + 1, task: taskInput, points: pointInput },
+    ];
+    setToDoList(copy);
   };
 
   return (
@@ -30,7 +35,9 @@ function App() {
         <PointCounter pointTotal={pointTotal} />
       </div>
       <div className="ItemList">
-        {list.map((item) => {
+        <ToDoForm addTask={addTask} />
+
+        {toDoList.map((item) => {
           return (
             <>
               <div className="item-container">
@@ -40,7 +47,7 @@ function App() {
                   points={item.points}
                   onClick={handleRemoveItem}
                 />
-                <ListItem name={item.name} points={item.points} />
+                <ListItem name={item.task} points={item.points} />
               </div>
             </>
           );

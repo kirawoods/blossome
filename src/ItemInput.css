@@ -1,0 +1,22 @@
+.ItemInput {
+  display: flex;
+  justify-content: space-between;
+}
+
+.TaskInput {
+  border: none;
+  width: 60%;
+  font-size: 30px;
+}
+
+.PointInput {
+  border: none;
+  width: 20%;
+  font-size: 30px;
+}
+
+.SubmitButton {
+  width: 0px;
+  border: none;
+  background-color: white;
+}

@@ -1,0 +1,5 @@
+[
+  { "task": "ItemOne", "points": 5 },
+  { "task": "ItemTwo", "points": 10 },
+  { "task": "ItemThree", "points": 15 }
+]
