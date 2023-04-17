@@ -11,7 +11,8 @@ function App() {
 
   const handleRemoveItem = (e) => {
     const name = e.target.getAttribute("name");
-    setToDoList(toDoList.filter((item) => item.name !== name));
+    console.log(name);
+    setToDoList(toDoList.filter((item) => item.task !== name));
     const points = e.target.getAttribute("points");
     updatePointTotal(parseInt(pointTotal) + parseInt(points));
   };
@@ -35,15 +36,16 @@ function App() {
         <PointCounter pointTotal={pointTotal} />
       </div>
       <div className="ItemList">
+        <div className="ColumnHeader">Tasks</div>
         <ToDoForm addTask={addTask} />
 
         {toDoList.map((item) => {
           return (
             <>
-              <div className="item-container">
+              <div key={item.id} className="item-container">
                 <span
                   className="checkbox"
-                  name={item.name}
+                  name={item.task}
                   points={item.points}
                   onClick={handleRemoveItem}
                 />

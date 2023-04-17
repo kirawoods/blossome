@@ -22,6 +22,10 @@
   font-size: 20px;
 }
 
+.ColumnHeader {
+  font-size: 40px;
+}
+
 .ItemList {
   margin: 0px auto;
 }
