@@ -1,13 +1,23 @@
 import "./App.css";
 import { ListItem } from "./ListItem";
 import { PointCounter } from "./PointCounter";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ToDoForm } from "./ToDoForm";
 import data from "./data.json";
 
 function App() {
   const [toDoList, setToDoList] = useState(data);
   const [pointTotal, updatePointTotal] = useState(0);
+  const [people, setPeople] = useState([{}]);
+
+  useEffect(() => {
+    fetch("/members")
+      .then((res) => res.json())
+      .then((data) => {
+        setPeople(data);
+        console.log(data);
+      });
+  }, []);
 
   const handleRemoveItem = (e) => {
     const name = e.target.getAttribute("name");
@@ -39,7 +49,7 @@ function App() {
         <div className="ColumnHeader">Tasks</div>
         <ToDoForm addTask={addTask} />
 
-        {toDoList.map((item) => {
+        {toDoList.map((item, i) => {
           return (
             <>
               <div key={item.id} className="item-container">
@@ -49,11 +59,18 @@ function App() {
                   points={item.points}
                   onClick={handleRemoveItem}
                 />
-                <ListItem name={item.task} points={item.points} />
+                <ListItem key={i} name={item.task} points={item.points} />
               </div>
             </>
           );
         })}
+      </div>
+      <div>
+        {typeof people.members === "undefined" ? (
+          <p>Loading...</p>
+        ) : (
+          people.members.map((member, i) => <p key={i}>{member}</p>)
+        )}
       </div>
     </div>
   );
