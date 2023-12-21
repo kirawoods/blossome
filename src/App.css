@@ -22,6 +22,10 @@
   font-size: 20px;
 }
 
+.ColumnContainer {
+  display: flex;
+}
+
 .ColumnHeader {
   font-size: 40px;
 }

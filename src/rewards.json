@@ -1,0 +1,5 @@
+[
+  { "id": 1, "reward": "RewardOne", "points": 5 },
+  { "id": 2, "reward": "RewardTwo", "points": 10 },
+  { "id": 3, "reward": "RewardThree", "points": 15 }
+]

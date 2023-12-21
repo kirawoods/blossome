@@ -1,30 +1,31 @@
 import "./App.css";
 import { ListItem } from "./ListItem";
 import { PointCounter } from "./PointCounter";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ToDoForm } from "./ToDoForm";
-import data from "./data.json";
+import { RewardsForm } from "./RewardsForm";
+import tasks from "./tasks.json";
+import rewards from "./rewards.json";
 
 function App() {
-  const [toDoList, setToDoList] = useState(data);
+  const [toDoList, setToDoList] = useState(tasks);
+  const [rewardsList, setRewardsList] = useState(rewards);
   const [pointTotal, updatePointTotal] = useState(0);
-  const [people, setPeople] = useState([{}]);
 
-  useEffect(() => {
-    fetch("/members")
-      .then((res) => res.json())
-      .then((data) => {
-        setPeople(data);
-        console.log(data);
-      });
-  }, []);
-
-  const handleRemoveItem = (e) => {
+  const handleRemoveTask = (e) => {
     const name = e.target.getAttribute("name");
     console.log(name);
     setToDoList(toDoList.filter((item) => item.task !== name));
     const points = e.target.getAttribute("points");
     updatePointTotal(parseInt(pointTotal) + parseInt(points));
+  };
+
+  const handleRemoveReward = (e) => {
+    const name = e.target.getAttribute("name");
+    console.log(name);
+    setRewardsList(rewardsList.filter((item) => item.reward !== name));
+    const points = e.target.getAttribute("points");
+    updatePointTotal(parseInt(pointTotal) - parseInt(points));
   };
 
   const addTask = (taskInput, pointInput) => {
@@ -45,32 +46,46 @@ function App() {
         </div>
         <PointCounter pointTotal={pointTotal} />
       </div>
-      <div className="ItemList">
-        <div className="ColumnHeader">Tasks</div>
-        <ToDoForm addTask={addTask} />
+      <div className="ColumnContainer">
+        <div className="ItemList">
+          <div className="ColumnHeader">Tasks</div>
+          <ToDoForm addTask={addTask} />
 
-        {toDoList.map((item, i) => {
-          return (
-            <>
-              <div key={item.id} className="item-container">
-                <span
-                  className="checkbox"
-                  name={item.task}
-                  points={item.points}
-                  onClick={handleRemoveItem}
-                />
-                <ListItem key={i} name={item.task} points={item.points} />
-              </div>
-            </>
-          );
-        })}
-      </div>
-      <div>
-        {typeof people.members === "undefined" ? (
-          <p>Loading...</p>
-        ) : (
-          people.members.map((member, i) => <p key={i}>{member}</p>)
-        )}
+          {toDoList.map((item, i) => {
+            return (
+              <>
+                <div key={item.id} className="item-container">
+                  <span
+                    className="checkbox"
+                    name={item.task}
+                    points={item.points}
+                    onClick={handleRemoveTask}
+                  />
+                  <ListItem key={i} name={item.task} points={item.points} />
+                </div>
+              </>
+            );
+          })}
+        </div>
+        <div className="ItemList">
+          <div className="ColumnHeader">Rewards</div>
+          <RewardsForm addTask={addTask} />
+          {rewardsList.map((item, i) => {
+            return (
+              <>
+                <div key={item.id} className="item-container">
+                  <span
+                    className="checkbox"
+                    name={item.reward}
+                    points={item.points}
+                    onClick={handleRemoveReward}
+                  />
+                  <ListItem key={i} name={item.reward} points={item.points} />
+                </div>
+              </>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
